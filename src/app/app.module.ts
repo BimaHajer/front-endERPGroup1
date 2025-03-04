@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClarityModule } from '@clr/angular';
+import { ClarityModule, ClrIconModule } from '@clr/angular';
 import { CoreModule } from './core/core.module';
 import {
   ClarityIcons,
@@ -31,7 +31,9 @@ import {
   imageIcon,timesCircleIcon, organizationIcon, floppyIcon, storeIcon, trashIcon, pencilIcon ,linkIcon, cloneIcon ,searchIcon,filterIcon ,resizeIcon, shrinkIcon, sadFaceIcon,bookmarkIcon, calculatorIcon ,creditCardIcon, bookIcon,
   undoIcon,blockIcon, blocksGroupIcon, truckIcon, barChartIcon, lockIcon, addTextIcon, angleIcon, exclamationCircleIcon, checkCircleIcon, checkIcon, timesIcon, calendarIcon, infoCircleIcon, plusCircleIcon, windowCloseIcon, popOutIcon,
   arrowIcon, exclamationTriangleIcon,
-  formIcon,refreshIcon,downloadIcon,envelopeIcon,happyFaceIcon,fileSettingsIcon,worldIcon,nvmeIcon,fileIcon,printerIcon
+  formIcon,refreshIcon,downloadIcon,envelopeIcon,happyFaceIcon,fileSettingsIcon,worldIcon,nvmeIcon,fileIcon,printerIcon,
+  tagIcon,
+  factoryIcon
 } from '@cds/core/icon';
 import '@cds/core/icon/register.js';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -41,7 +43,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 ClarityIcons.addIcons(homeIcon, minusIcon,circleIcon,detailsIcon,plusIcon,cogIcon, dashboardIcon, carIcon, clipboardIcon, shoppingCartIcon, userIcon, logoutIcon, usersIcon, pieChartIcon,
   administratorIcon, employeeGroupIcon, tagsIcon, coinBagIcon,eCheckIcon,noteIcon,imageIcon,timesCircleIcon, banIcon,organizationIcon,floppyIcon,storeIcon,trashIcon,pencilIcon,linkIcon,cloneIcon,searchIcon,filterIcon,
   resizeIcon,shrinkIcon,sadFaceIcon,bookmarkIcon,calculatorIcon ,creditCardIcon, bookIcon, undoIcon, blockIcon, blocksGroupIcon,truckIcon,barChartIcon,lockIcon,addTextIcon,angleIcon,exclamationCircleIcon,checkCircleIcon,checkIcon,timesIcon,
-  calendarIcon,infoCircleIcon,plusCircleIcon,windowCloseIcon,popOutIcon,arrowIcon,exclamationTriangleIcon, formIcon, refreshIcon, downloadIcon, envelopeIcon,happyFaceIcon,fileSettingsIcon,worldIcon,nvmeIcon, fileIcon,printerIcon);
+  calendarIcon,infoCircleIcon,plusCircleIcon,windowCloseIcon,popOutIcon,arrowIcon,exclamationTriangleIcon, formIcon, refreshIcon, downloadIcon, envelopeIcon,happyFaceIcon,fileSettingsIcon,worldIcon,nvmeIcon, fileIcon,printerIcon,tagIcon,factoryIcon);
 
 @NgModule({
   declarations: [

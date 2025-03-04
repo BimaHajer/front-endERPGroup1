@@ -21,6 +21,33 @@ export class SideNavComponent {
         "order": 2,
         "subsNavbar": []
     }
+
+    ,
+    {
+        "name": "Fournisseurs",
+        "route": "providers",
+        "icon": "users",
+        "order": 3,
+        "subsNavbar": []
+    }
+
+    ,
+    {
+        "name": "Categories",
+        "route": "category",
+        "icon": "folder",
+        "order": 4,
+        "subsNavbar": []
+    }
+
+    ,
+    {
+        "name": "Tva",
+        "route": "tva",
+        "icon": "factory",
+        "order": 5,
+        "subsNavbar": []
+    }
 ]
 
 }
