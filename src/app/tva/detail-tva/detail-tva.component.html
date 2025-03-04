@@ -1,0 +1,56 @@
+<span>
+    <span><a routerLink="/tva">Tva</a></span> /
+    <span>Details</span>
+  </span>
+  <br>
+  <section>
+    <h3>Détails d'tva</h3>
+    <div class="spinner-class" *ngIf="!tvaId">
+      <clr-spinner [clrMedium]="true"></clr-spinner>
+    </div>
+    <form clrForm *ngIf="tvaId">
+      <clr-input-container>
+        <label>Id </label>
+        <input clrInput type="text" value="{{tva.id}}" readonly *ngIf="tva.id" />
+        <label *ngIf="!tva.id"><span class="label label-warning">Non disponible!</span></label>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Valeur en Pourcentage (%)  </label>
+        <input class="input-full-text" clrInput type="number" readonly [(ngModel)]="tva.value" name="value"
+          *ngIf="tva.value" />
+        <label *ngIf="!tva.value"><span class="label label-warning">Non disponible!</span></label>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Actif / Non actif</label>
+        <label *ngIf="tva.active==true"><span class="label label-success">Actif</span></label>
+        <label *ngIf="tva.active==false"><span class="label label-warning">Non actif</span></label>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Créé(e) le</label>
+        <input clrInput *ngIf="tva.createdAt" value="{{ tva.createdAt | date: 'dd/MM/yyyy à HH:mm' }}" readonly />
+        <label *ngIf="!tva.createdAt "><span class="label label-warning">Non disponible!</span></label>
+      </clr-input-container>
+      <clr-input-container>
+        <label>Mis(e) à jour le</label>
+        <input clrInput *ngIf="tva.updatedAt" value="{{ tva.updatedAt | date: 'dd/MM/yyyy à HH:mm' }}" readonly />
+        <label *ngIf="!tva.updatedAt"><span class="label label-warning">Non disponible!</span></label>
+      </clr-input-container>
+      <br>
+  
+      <div class="btn-group btn-sm btn-outline-primary ">
+        <button class="btn" (mousedown)="redirectTo()">
+          <cds-icon shape="undo"></cds-icon> Retour
+        </button>
+        <button class="btn" routerLink="/tva/edit-tva/{{tva.id}}" *ngIf="tva.id!=currentTva">
+          <cds-icon shape="pencil"></cds-icon> Modifier tva
+        </button>
+        <button class="btn" (click)="deleteAction()" *ngIf="tva.id!=currentTva">
+          <cds-icon shape="trash"></cds-icon> Supprimer
+        </button>
+      </div>
+    </form>
+  
+  </section>
+  <app-delete-tva *ngIf="showAlert && tva.id" (closed)="close()" (saved)="save()" [allSelected]="[tva.id]"></app-delete-tva>
+  
+
