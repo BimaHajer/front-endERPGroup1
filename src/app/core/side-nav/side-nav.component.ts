@@ -48,6 +48,28 @@ export class SideNavComponent {
         "order": 5,
         "subsNavbar": []
     }
+    ,
+    {
+      "name": "Clients",
+      "route": "clients",
+      "icon": "users",
+      "order": 6,
+      "subsNavbar": []
+  },
+  {
+    "name": "Marques",
+    "route": "brands",
+    "icon": "tags",
+    "order": 7,
+    "subsNavbar": [],
+},
+{
+  "name": "Modeles",
+  "route": "modeles",
+  "icon": "form",
+  "order": 8,
+  "subsNavbar": []
+}
 ]
 
 }

@@ -29,6 +29,18 @@ const routes: Routes = [
     path: 'tva',canActivate: [AuthGuard],
     loadChildren: () => import('./tva/tva.module').then(m => m.TvaModule)
   }
+  ,  {
+    path: 'clients',canActivate: [AuthGuard],
+    loadChildren: () => import('./client/client.module').then(m => m.ClientModule)
+  },
+  {
+    path: 'brands',canActivate: [AuthGuard],
+    loadChildren: () => import('./brand/brand.module').then(m => m.BrandModule)
+  },
+  {
+    path: 'modeles',canActivate: [AuthGuard],
+    loadChildren: () => import('./modele/modele.module').then(m => m.ModeleModule)
+  }
 
 ];
 
