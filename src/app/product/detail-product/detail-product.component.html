@@ -1,0 +1,151 @@
+<span>
+    <span><a routerLink="/products">Produits</a></span> /
+    <span>Détails</span>
+</span>
+<br>
+
+<section>
+    <h3>Détails de produit</h3>
+
+    <div class="spinner-class" *ngIf="!productId">
+        <clr-spinner [clrMedium]="true"></clr-spinner>
+    </div>
+
+    <clr-tabs *ngIf="productId">
+
+        
+        <clr-tab>
+            <button clrTabLink>Informations Générales</button>
+            <clr-tab-content *clrIfActive>
+                <form clrForm>
+
+                    <clr-input-container>
+                        <label>Id</label>
+                        <input clrInput type="text" value="{{product.id}}" readonly *ngIf="product.id" />
+                        <label *ngIf="!product.id"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+
+                    <clr-input-container>
+                        <label>Nom</label>
+                        <input class="input-full-text" clrInput type="text" readonly [(ngModel)]="product.name" name="name" *ngIf="product.name" />
+                        <label *ngIf="!product.name"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+
+                    <clr-textarea-container>
+                        <label>Description</label>
+                        <textarea clrTextarea [(ngModel)]="product.description" name="description" required *ngIf="product.description"></textarea>
+                        <label *ngIf="!product.description"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-textarea-container>
+
+                    <clr-input-container>
+                        <label>Actif / Non actif</label>
+                        <label *ngIf="product.active==true"><span class="label label-success">Actif</span></label>
+                        <label *ngIf="product.active==false"><span class="label label-warning">Non actif</span></label>
+                    </clr-input-container>
+
+              
+                </form>
+            </clr-tab-content>
+        </clr-tab>
+
+        <clr-tab>
+            <button clrTabLink>Tarif</button>
+            <clr-tab-content *clrIfActive>
+                <form clrForm>
+        
+                    <clr-input-container>
+                        <label>Catégorie</label>
+                        <input clrInput type="text" value="{{product.categoryId?.name}}" readonly *ngIf="product.categoryId?.name" />
+                        <label *ngIf="!product.categoryId?.name"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                        <label>Marque</label>
+                        <input clrInput type="text" value="{{product.modelId.brandId?.name}}" readonly *ngIf="product.modelId.brandId?.name" />
+                        <label *ngIf="!product.modelId.brandId?.name"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                        <label>Modèle</label>
+                        <input clrInput type="text" value="{{product.modelId?.name}}" readonly *ngIf="product.modelId?.name" />
+                        <label *ngIf="!product.modelId?.name"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                        <label>TVA (%)</label>
+                        <input clrInput type="number" readonly [(ngModel)]="product.tva" name="tva" *ngIf="product.tva" />
+                        <label *ngIf="!product.tva"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                        <label>Prix HT</label>
+                        <input clrInput type="number" readonly [(ngModel)]="product.priceHT" name="priceHT" *ngIf="product.priceHT" />
+                        <label *ngIf="!product.priceHT"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                        <label>Prix TTC</label>
+                        <input clrInput type="number" readonly [(ngModel)]="product.priceTTC" name="priceTTC" *ngIf="product.priceTTC" />
+                        <label *ngIf="!product.priceTTC"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                        <label>Quantité Initiale</label>
+                        <input clrInput type="number" readonly [(ngModel)]="product.initialQuantity" name="initialQuantity" *ngIf="product.initialQuantity" />
+                        <label *ngIf="!product.initialQuantity"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+        
+                    <clr-input-container>
+                        <label>Quantité Restante</label>
+                        <input clrInput type="number" readonly [(ngModel)]="product.remainingQuantity" name="remainingQuantity" *ngIf="product.remainingQuantity" />
+                        <label *ngIf="!product.remainingQuantity"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+
+                    <clr-input-container>
+                        <label>Créé(e) le</label>
+                        <input clrInput *ngIf="product.createdAt" value="{{ product.createdAt | date: 'dd/MM/yyyy à HH:mm' }}" readonly />
+                        <label *ngIf="!product.createdAt"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+
+                    <clr-input-container>
+                        <label>Mis(e) à jour le</label>
+                        <input clrInput *ngIf="product.updatedAt" value="{{ product.updatedAt | date: 'dd/MM/yyyy à HH:mm' }}" readonly />
+                        <label *ngIf="!product.updatedAt"><span class="label label-warning">Non disponible!</span></label>
+                    </clr-input-container>
+        
+                </form>
+            </clr-tab-content>
+        </clr-tab>
+        
+
+      
+        <clr-tab>
+            <button clrTabLink>Galerie</button>
+            <clr-tab-content *clrIfActive>
+                <form clrForm>
+
+                   
+
+                </form>
+            </clr-tab-content>
+        </clr-tab>
+
+    </clr-tabs>
+
+    <br>
+
+    <div class="btn-group btn-sm btn-outline-primary">
+        <button class="btn" (mousedown)="redirectTo()">
+            <cds-icon shape="undo"></cds-icon> Retour
+        </button>
+        <button class="btn" routerLink="/products/edit-product/{{product.id}}" *ngIf="product.id!=currentProduct">
+            <cds-icon shape="pencil"></cds-icon> Modifier Produit
+        </button>
+        <button class="btn" (click)="deleteAction()" *ngIf="product.id!=currentProduct">
+            <cds-icon shape="trash"></cds-icon> Supprimer
+        </button>
+    </div>
+
+</section>
+<app-delete-product *ngIf="showAlert && product.id" (closed)="close()" (saved)="save()" [allSelected]="[product.id]"></app-delete-product>
+

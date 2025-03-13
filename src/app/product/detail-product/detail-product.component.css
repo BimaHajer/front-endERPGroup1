@@ -1,0 +1,27 @@
+/* Appliquer un espacement uniforme entre les lignes de tableau */
+.table td, .table th {
+    padding: 10px; /* Espacement uniforme entre les cellules */
+    vertical-align: middle; /* Centrer verticalement les éléments */
+}
+
+/* Appliquer un espacement uniforme aux champs de saisie */
+.input-full-text {
+    margin-bottom: 10px; /* Espace sous chaque champ de saisie */
+}
+
+/* Pour les labels des champs */
+label {
+    margin-bottom: 5px; /* Espacement sous les labels */
+    font-weight: bold; /* Mettre en valeur les labels */
+}
+
+/* Appliquer un espacement uniforme à chaque ligne du tableau */
+.table th {
+    background-color: #f8f9fa; /* Couleur d'arrière-plan pour les en-têtes */
+    text-align: center; /* Centrer les en-têtes */
+}
+
+/* Espacement autour du formulaire et des éléments */
+form clr-form {
+    margin-bottom: 20px; /* Espacement sous le formulaire */
+}
