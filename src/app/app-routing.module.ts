@@ -40,6 +40,10 @@ const routes: Routes = [
   {
     path: 'modeles',canActivate: [AuthGuard],
     loadChildren: () => import('./modele/modele.module').then(m => m.ModeleModule)
+  },
+  {
+    path: 'products',canActivate: [AuthGuard],
+    loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
   }
 
 ];
