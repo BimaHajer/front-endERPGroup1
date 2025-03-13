@@ -1,0 +1,145 @@
+<span #top class="scroll-margin-top">
+    <span><a routerLink="/products">Produit</a></span>/ 
+    <span>Modification</span>
+</span>
+
+<section>
+    <app-alert [success]="alert.success" [msgSuccess]="alert.msgSuccess" [echec]="alert.echec" [msgEchec]="alert.msgEchec" (closed)="alert.open = false" *ngIf="alert.open"></app-alert>
+   <br>
+    <h3>Modifier produit</h3>
+
+    <div class="spinner-class" *ngIf="!productId">
+        <clr-spinner [clrMedium]="true"></clr-spinner>
+    </div>
+
+    <form clrStepper [formGroup]="productForm" (ngSubmit)="submitAction(top)" *ngIf="productId">
+        <clr-stepper-panel formGroupName="general">
+            <clr-step-title>Informations Générales</clr-step-title>
+            <clr-step-content *clrIfExpanded>
+                <clr-input-container>
+                    <label>Nom *</label>
+                    <input clrInput type="text" formControlName="name" required />
+                    <clr-control-error *clrIfError="'required'">Ce champ est obligatoire</clr-control-error>
+                </clr-input-container>
+  
+                <clr-textarea-container>
+                    <label>Description</label>
+                    <textarea clrTextarea formControlName="description"></textarea>
+                </clr-textarea-container>
+  
+                <clr-checkbox-container>
+                    <label>Actif / Non actif</label>
+                    <clr-checkbox-wrapper>
+                        <input type="checkbox" clrCheckbox formControlName="active" />
+                    </clr-checkbox-wrapper>
+                </clr-checkbox-container>
+  
+                <button clrStepButton="next">Suivant</button>
+            </clr-step-content>
+        </clr-stepper-panel>
+
+        <clr-stepper-panel formGroupName="detail">
+            <clr-step-title>Catégories & Modèles</clr-step-title>
+            <clr-step-content *clrIfExpanded>
+                <clr-combobox-container>
+                    <label>Catégorie</label>
+                    <clr-combobox name="categoryId" [clrLoading]="loading" (clrInputChange)="onSearchChange($event, 'categorys')"
+                        (clrOpenChange)="$event ? onSearchChange('','categorys') : null"
+                        placeholder="Sélectionner catégorie" formControlName="categoryId">
+                        <clr-options *ngIf="categorys">
+                            <clr-option *clrOptionItems="let item of categorys; field:'name'" [clrValue]="item">
+                                {{item.name}}
+                            </clr-option>
+                        </clr-options>
+                    </clr-combobox>
+                    <clr-control-error>Ce champ est obligatoire</clr-control-error>
+                </clr-combobox-container>
+                <app-alert [success]="brandAlert.success" [msgSuccess]="brandAlert.msgSuccess" [echec]="brandAlert.echec" [msgEchec]="brandAlert.msgEchec" (closed)="brandAlert.open = false" *ngIf="brandAlert.open"></app-alert>
+
+                <clr-combobox-container>
+                  <label>Marque</label>
+                  <clr-combobox name="brandId" [clrLoading]="loading" (clrInputChange)="onSearchChange($event, 'brands')"
+                      (clrOpenChange)="$event ? onSearchChange('','brands') : null"
+                      placeholder="Sélectionner marque" formControlName="brandId">
+                      <clr-options *ngIf="brands">
+                          <clr-option *clrOptionItems="let item of brands; field:'name'" [clrValue]="item">
+                              {{item.name}}
+                          </clr-option>
+                      </clr-options>
+                  </clr-combobox>
+                  <clr-control-error>Ce champ est obligatoire</clr-control-error>
+              </clr-combobox-container>
+
+                <clr-combobox-container>
+                    <label>Modèle</label>
+                      <clr-combobox name="modelId" [clrLoading]="loading" (clrInputChange)="onSearchChange($event,'models')"
+                          (clrOpenChange)="$event ? onSearchChange('','models') : null"
+                          placeholder="Sélectionner modele" formControlName="modelId">
+                          <clr-options *ngIf="models">
+                              <clr-option *clrOptionItems="let item of models; field:'name'" [clrValue]="item">
+                                  {{item.name}}
+                              </clr-option>
+                          </clr-options>
+                      </clr-combobox>
+                      <clr-control-error>Ce champ est obligatoire</clr-control-error>
+                  </clr-combobox-container>
+  
+                <button clrStepButton="next">Suivant</button>
+            </clr-step-content>
+        </clr-stepper-panel>
+
+        <clr-stepper-panel formGroupName="tarif">
+            <clr-step-title>Tarif</clr-step-title>
+            <clr-step-content *clrIfExpanded>
+         
+                <app-alert [success]="tvaAlert.success" [msgSuccess]="tvaAlert.msgSuccess" [echec]="tvaAlert.echec" [msgEchec]="tvaAlert.msgEchec" (closed)="tvaAlert.open = false" *ngIf="tvaAlert.open"> </app-alert>
+                  
+                  
+
+                  <clr-input-container>
+                      <label>TVA (%) *</label>
+                      <input clrInput type="number" formControlName="tva" required />
+                      <clr-control-error *clrIfError="'required'">Ce champ est obligatoire</clr-control-error>
+                  </clr-input-container>
+
+                  <clr-input-container>
+                      <label>Prix d'achat HT *</label>
+                      <input clrInput type="number" formControlName="priceHT"  step="0.01"
+                          (input)="calculPriceTTCWithTax()" required   />
+                      <clr-control-error *clrIfError="'required'">Ce champ est obligatoire!</clr-control-error>
+                      <clr-control-error *clrIfError="'pattern'">Nb max des chiffres Av/Ap la virgule: 10/2</clr-control-error>
+                  </clr-input-container>
+
+                  <clr-input-container>
+                      <label>Prix TTC *</label>
+                      <input clrInput type="number" formControlName="priceTTC" step="0.01"
+                       (input)="calculPriceHTWithTax()" required />
+                      <clr-control-error *clrIfError="'required'">Ce champ est obligatoire!</clr-control-error>
+                      <clr-control-error *clrIfError="'pattern'">Nb max des chiffres Av/Ap la virgule: 10/2</clr-control-error>
+                  </clr-input-container>
+                  
+                <clr-input-container>
+                    <label>Quantité Initiale *</label>
+                    <input clrInput type="number" formControlName="initialQuantity" required />
+                    <clr-control-error *clrIfError="'required'">Ce champ est obligatoire</clr-control-error>
+                </clr-input-container>
+
+                <clr-input-container>
+                    <label>Quantité Restante *</label>
+                    <input clrInput type="number" formControlName="remainingQuantity" required />
+                    <clr-control-error *clrIfError="'required'">Ce champ est obligatoire</clr-control-error>
+                </clr-input-container>
+            </clr-step-content>
+        </clr-stepper-panel>
+        <br><br>
+        <div class="btn-group btn-sm btn-outline-primary">
+            <button type="reset" class="btn" (mousedown)="redirectTo()">
+                <cds-icon shape="undo"></cds-icon> Retour
+            </button>
+            <button type="submit" class="btn" [disabled]="productForm.invalid" [clrLoading]="validateBtnState">
+                <cds-icon shape="plus"></cds-icon> Enregistrer
+            </button>
+        </div>
+    </form>
+     <label class="alert-sm">* Champ obligatoire</label>
+</section>

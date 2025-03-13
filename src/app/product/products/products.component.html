@@ -1,0 +1,92 @@
+<clr-datagrid [clrDgLoading]="loading" (clrDgRefresh)="refresh($event)" [(clrDgSelected)]="allSelected"
+    (clrDgSelectedChange)="selectionChanged()" [clrDgRowSelection]="false">
+    <clr-dg-action-bar>
+        <div class="btn-group">
+            <button class="btn btn-sm" routerLink="/products/add-product/">
+                <cds-icon shape="plus"></cds-icon> Ajouter Produit
+            </button>
+            <button class="btn btn-sm" (click)="editAction()" [disabled]="allSelected.length !== 1">
+                <cds-icon shape="pencil"></cds-icon> Modifier
+            </button>
+            <button class="btn btn-sm" (click)="deleteMultipleAction()" [disabled]="allSelected.length === 0">
+                <cds-icon shape="trash"></cds-icon> Supprimer
+            </button>
+        </div>
+    </clr-dg-action-bar>
+
+   
+    <clr-dg-column [clrDgSortBy]="'id'">
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            ID
+        </ng-container>
+    </clr-dg-column>
+
+    <clr-dg-column [clrDgSortBy]="'name'">
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            Nom
+        </ng-container>
+    </clr-dg-column>
+
+    <clr-dg-column [clrDgSortBy]="'categoryId?.name'">
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            Catégorie
+        </ng-container>
+    </clr-dg-column>
+
+    <clr-dg-column [clrDgSortBy]="'modelId.brandId?.name'">
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            Marque
+        </ng-container>
+    </clr-dg-column>
+
+    <clr-dg-column [clrDgSortBy]="'modelId?.name'">
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            Modèle
+        </ng-container>
+    </clr-dg-column>
+
+    <clr-dg-column [clrDgSortBy]="'active'">
+        <ng-container *clrDgHideableColumn="{hidden: false}">
+            Actif / Non actif
+        </ng-container>
+    </clr-dg-column>
+
+    <clr-dg-placeholder>Nous n'avons trouvé aucun produit!</clr-dg-placeholder>
+
+    <clr-dg-row *ngFor="let item of products" [clrDgItem]="item" class="cursor-pointer" [clrDgSelected]="existInSelected(item)">
+        <!-- Nouvelle cellule pour afficher l'ID du produit -->
+        <clr-dg-cell routerLink="/products/detail-product/{{item.id}}">
+            <span>{{item.id}}</span>
+        </clr-dg-cell>
+
+        <clr-dg-cell routerLink="/products/detail-product/{{item.id}}">
+            <span *ngIf="item.name">{{item.name}}</span>
+            <cds-icon shape="ban" *ngIf="!item.name"></cds-icon>
+        </clr-dg-cell>
+        <clr-dg-cell routerLink="/products/detail-product/{{item.id}}">
+            <span *ngIf="item.categoryId?.name">{{item.categoryId.name}}</span>
+            <cds-icon shape="ban" *ngIf="!item.categoryId?.name"></cds-icon>
+        </clr-dg-cell>
+        <clr-dg-cell routerLink="/products/detail-product/{{item.id}}">
+            <span *ngIf="item.modelId.brandId?.name">{{item.modelId.brandId?.name}}</span>
+            <cds-icon shape="ban" *ngIf="!item.modelId.brandId?.name"></cds-icon>
+        </clr-dg-cell>
+        <clr-dg-cell routerLink="/products/detail-product/{{item.id}}">
+            <span *ngIf="item.modelId?.name">{{item.modelId.name}}</span>
+            <cds-icon shape="ban" *ngIf="!item.modelId?.name"></cds-icon>
+        </clr-dg-cell>
+        <clr-dg-cell routerLink="/products/detail-product/{{item.id}}">
+            <span *ngIf="item.active === true" class="label label-success">Actif</span>
+            <span *ngIf="item.active === false" class="label label-warning">Non actif</span>
+        </clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgTotalItems]="count" [clrDgPageSize]="pageSize">
+            <clr-dg-page-size [clrPageSizeOptions]="pageSizeOptions">Produits par page</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}} de {{count}}
+        </clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>
+
+<app-delete-product *ngIf="showAlert" (closed)="close()" (saved)="save()" [allSelected]="idsSelected"></app-delete-product>
