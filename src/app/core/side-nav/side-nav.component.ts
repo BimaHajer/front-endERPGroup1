@@ -69,6 +69,13 @@ export class SideNavComponent {
   "icon": "form",
   "order": 8,
   "subsNavbar": []
+},
+{
+  "name": "Produits",
+  "route": "products",
+  "icon": "form",
+  "order": 9,
+  "subsNavbar": []
 }
 ]
 
