@@ -38,20 +38,20 @@ export class EditProductComponent {
           name: [, [Validators.required]],
           description: [],
           active: [true], }),
-    
+
           detail: this.formBuilder.group({
           categoryId: [, [Validators.required]],
           brandId: [, [Validators.required]],
           modelId: [, [Validators.required]],
         }),
         tarif: this.formBuilder.group({
-          tva: [, [Validators.required]], 
+          tva: [, [Validators.required]],
           priceHT: [0.00, [Validators.pattern((/^\d*[\.,\,]?\d{0,2}$/)), Validators.max(9999999999.99)]],
           priceTTC: [0.00, [Validators.pattern((/^\d*[\.,\,]?\d{0,2}$/)), Validators.max(9999999999.99)]],
           initialQuantity: [, [Validators.required]],
           remainingQuantity: [, [Validators.required]] }),
         });
-        
+
 
 
   }
@@ -59,7 +59,7 @@ export class EditProductComponent {
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.productId = Number(params.get('id'));
-      
+
       if (this.productId) {
         this.getProduct();
       }
@@ -82,16 +82,16 @@ export class EditProductComponent {
           this.tvaAlert.open = false;
         }
       });
-    
-     
+
+
       this.productForm.get('tarif.tva')?.valueChanges.subscribe(value => {
         if (value !== null && value !== undefined && value !== '') {
           this.tvaAlert.open = false;
         }
-    
-       
+
+
       });
-  
+
       this.productForm.get('tarif.priceHT')?.valueChanges.subscribe(value => {
         const taxRate = this.productForm.get('tarif.tva')?.value || 0;
         if (taxRate && value !== null && value !== undefined) {
@@ -99,7 +99,7 @@ export class EditProductComponent {
           this.productForm.get('tarif.priceTTC')?.setValue(priceTTC, { emitEvent: false });
         }
       });
-  
+
       this.productForm.get('tarif.priceTTC')?.valueChanges.subscribe(value => {
         const taxRate = this.productForm.get('tarif.tva')?.value || 0;
         if (taxRate && value !== null && value !== undefined) {
@@ -107,8 +107,8 @@ export class EditProductComponent {
           this.productForm.get('tarif.priceHT')?.setValue(priceHT, { emitEvent: false });
         }
       });
-    
-     
+
+
     this.productForm.get('detail.brandId')?.valueChanges.subscribe(value => {
       if (!value) {
         this.brandAlert = {
@@ -117,28 +117,28 @@ export class EditProductComponent {
           echec: true,
           open: true
         };
-   
+
         this.productForm.get('detail.modelId')?.disable();
-     
+
       } else {
         this.brandAlert.open = false;
         this.productForm.get('detail.modelId')?.enable();
       }
     });
-  
+
         this.productForm.get('tarif.initialQuantity')?.valueChanges.subscribe(value => {
           if (value !== null && value !== undefined) {
             this.productForm.get('tarif.remainingQuantity')?.setValue(value, { emitEvent: false });
           }
         });
-      
-       
+
+
         this.productForm.get('tarif.initialQuantity')?.valueChanges.subscribe(value => {
           if (value !== null && value !== undefined) {
             this.productForm.get('tarif.remainingQuantity')?.setValue(value, { emitEvent: false });
           }
         });
-    
+
         this.productForm.get('tarif.priceHT')?.valueChanges.subscribe(value => {
           const taxRate = this.productForm.get('tarif.tva')?.value || 0;
           if (value !== null && value !== undefined) {
@@ -146,7 +146,7 @@ export class EditProductComponent {
             this.productForm.get('tarif.priceTTC')?.setValue(priceTTC, { emitEvent: false });
           }
         });
-    
+
         this.productForm.get('tarif.priceTTC')?.valueChanges.subscribe(value => {
           const taxRate = this.productForm.get('tarif.tva')?.value || 0;
           if (value !== null && value !== undefined) {
@@ -154,9 +154,9 @@ export class EditProductComponent {
             this.productForm.get('tarif.priceHT')?.setValue(priceHT, { emitEvent: false });
           }
         });
-    
-       
-       
+
+
+
         this.productForm.get('tarif.priceHT')?.valueChanges.subscribe(value => {
           const taxRate = this.productForm.get('tarif.tva')?.value || 0;
           if (value !== null && value !== undefined) {
@@ -164,14 +164,14 @@ export class EditProductComponent {
             this.productForm.get('tarif.priceTTC')?.setValue(priceTTC, { emitEvent: false });
           }
         });
-  
-        
+
+
           this.productForm.get('tarif.priceHT')?.valueChanges.subscribe(value => {
             if (value !== null && value !== undefined) {
               this.calculPriceTTCWithTax();
             }
           });
-        
+
           this.productForm.get('tarif.priceTTC')?.valueChanges.subscribe(value => {
             if (value !== null && value !== undefined) {
               this.calculPriceHTWithTax();
@@ -181,7 +181,7 @@ export class EditProductComponent {
     }
     calculPriceTTCWithTax() {
       const tva = this.productForm.get('tarif.tva')?.value;
-  
+
       if (!tva) {
         this.tvaAlert = {
           success: false,
@@ -191,15 +191,15 @@ export class EditProductComponent {
         };
         return;
       }
-  
+
       const priceTTC = (this.productForm.value.tarif.priceHT * (1 + this.productForm.value.tarif.tva / 100)).toFixed(2);
       this.productForm.get('tarif')?.patchValue({ priceTTC });
       this.tvaAlert.open = false;
     }
-    
+
     calculPriceHTWithTax() {
       const tva = this.productForm.get('tarif.tva')?.value;
-  
+
       if (!tva) {
         this.tvaAlert = {
           success: false,
@@ -209,7 +209,7 @@ export class EditProductComponent {
         };
         return;
       }
-  
+
       const priceHT = (this.productForm.value.tarif.priceTTC / (1 + this.productForm.value.tarif.tva / 100)).toFixed(2);
       this.productForm.get('tarif')?.patchValue({ priceHT });
       this.tvaAlert.open = false;
@@ -218,8 +218,8 @@ export class EditProductComponent {
   getProduct() {
     this.productService.getProduct(this.productId).subscribe(
       (data:any) => {
-       
-       
+
+
         this.productForm.patchValue({
           general:{
             name: data.name,
@@ -240,7 +240,7 @@ export class EditProductComponent {
           }
 
         });
-        
+
       },
       err => { console.error('Observer got an error: ' + err) },
     )
@@ -248,44 +248,40 @@ export class EditProductComponent {
 
 
 
-  
+
 onSearchChange(args: string, type:string) {
   this.loading = true
   let filter: any={}
   if (args) {
     filter.take = 10
       filter.where = { name: { type: "ilike", value:args }, active: true }
-    
   } else {
     filter.take = 15
       filter.where = { active: true }
-  }if(this.productForm.get('detail.brandId')?.value){
+  }
+  if(this.productForm.get('detail.brandId')?.value){
     this.brandId =this.productForm.get('detail.brandId')?.value;
   }
   if(type === 'brands'){
-  //   this.productForm.patchValue({
-      
-  //     detail:{
-  //       modelId:''
-
-  //     },
-      
-      
-  //   })
+    !args ? this.productForm.patchValue({
+      detail:{
+        modelId:''
+      }
+    }) : null
 
    this.getBrands(filter);
   }else if (type === 'categorys'){
     this.getCategorys(filter);
   }else if (type === 'models'){
     this.getModeles(filter)
-  }   
+  }
 }
 
 
-  
- 
+
+
     getBrands(filter: any) {
-    
+
       filter.select
        = ['id', 'name']
           this.brandsService.getBrands(filter).subscribe(
@@ -298,16 +294,16 @@ onSearchChange(args: string, type:string) {
             () => this.loading = false
           );
         }
-     
-        
-          
-         
+
+
+
+
    getModeles(filter: any) {
-            
+
         filter.select
        = ['id', 'name']
        filter.where = Object.assign(filter.where, {brandId :this.brandId})
-        this.modelesService.getModeles(filter).subscribe(   
+        this.modelesService.getModeles(filter).subscribe(
       data => {
        this.models = data[0]
      },
@@ -317,12 +313,12 @@ onSearchChange(args: string, type:string) {
     () => this.loading = false
   );
  }
-                
-                
-                  
-                 
+
+
+
+
 getCategorys(filter: any) {
-                    
+
    filter.select
      = ['id', 'name']
      this.categorysService.getCategorys(filter).subscribe(
@@ -335,22 +331,22 @@ getCategorys(filter: any) {
      () => this.loading = false
      );
       }
-                
-          
+
+
   submitAction(top: HTMLElement) {
-    
+
     let product={
       name: this.productForm.value.general.name,
-      description: this.productForm.value.general.description, 
+      description: this.productForm.value.general.description,
       active: this.productForm.value.general.active,
-      brandId: this.productForm.value.detail.brandId, 
+      brandId: this.productForm.value.detail.brandId,
       categoryId: this.productForm.value.detail.categoryId,
-      modelId: this.productForm.value.detail.modelId, 
-      priceTTC: this.productForm.value.tarif.priceTTC, 
-      tva: this.productForm.value.tarif.tva, 
-      priceHT: this.productForm.value.tarif.priceHT, 
-      initialQuantity: this.productForm.value.tarif.initialQuantity, 
-      remainingQuantity: this.productForm.value.tarif.remainingQuantity 
+      modelId: this.productForm.value.detail.modelId,
+      priceTTC: this.productForm.value.tarif.priceTTC,
+      tva: this.productForm.value.tarif.tva,
+      priceHT: this.productForm.value.tarif.priceHT,
+      initialQuantity: this.productForm.value.tarif.initialQuantity,
+      remainingQuantity: this.productForm.value.tarif.remainingQuantity
      }
     if (this.productForm.valid) {
       this.validateBtnState = ClrLoadingState.LOADING;
@@ -367,8 +363,8 @@ getCategorys(filter: any) {
         }
       );
     }
-    
-    
+
+
     this.scroll(top);
   }
 
