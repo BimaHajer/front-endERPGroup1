@@ -40,10 +40,8 @@ export class CategorysComponent {
     }
   
     getCategorys() {
-      console.log("filter",this.filter)
       this.categoryService.getCategorys(this.filter).subscribe(
         data => {
-          console.log("data",data)
           this.categorys = data[0]
           this.count = data[1]
         },

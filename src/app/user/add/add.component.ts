@@ -17,6 +17,7 @@ export class AddComponent {
   loading: boolean = true
   loadingImg: boolean = false
   alert: Alert = new Alert()
+  roles: any=[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +33,7 @@ export class AddComponent {
         firstName: ['', [Validators.required]],
         lastName: ['', [Validators.required]],
         picture: [, [Validators.required]],
+        roleId:[, [Validators.required]],
         address: [],
         zipCode: [, Validators.maxLength(5)],
         active: [true],
@@ -40,8 +42,14 @@ export class AddComponent {
     );
   }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.getRole()
+  }
+getRole(){
+  this.userService.getRole().subscribe(data=>{
+    this.roles=data
+  })
+}
 
   submitAction(top: HTMLElement) {
     if (this.registerForm.valid) {
@@ -65,6 +73,7 @@ export class AddComponent {
     }
     this.scroll(top);
   }
+
 
   scroll(el: HTMLElement) {
     el.scrollIntoView({ block: 'start', behavior: 'smooth' });

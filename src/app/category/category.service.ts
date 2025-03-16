@@ -22,7 +22,6 @@ export class CategoryService {
       }
     
       editCategory(ID: number, categoryObject: Category): Observable<Category> {
-        console.log("id",ID)
         return this.http.patch<Category>(environment.api + '/categorys/'+JSON.stringify(ID), categoryObject);
       }
     

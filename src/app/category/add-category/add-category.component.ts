@@ -48,8 +48,7 @@ export class AddCategoryComponent {
           this.validateBtnState = ClrLoadingState.LOADING;
           this.categoryService.addCategory(this.registerForm.value).subscribe(
             (data) => {
-  
-              console.log("category",data)
+
               this.validateBtnState = ClrLoadingState.SUCCESS;
               this.registerForm.reset({ active: true });
               this.alert = { success: true, msgSuccess: "L'ajout d'categorie " + data.id + " a été effectué avec succès! ", echec: false, open: true }

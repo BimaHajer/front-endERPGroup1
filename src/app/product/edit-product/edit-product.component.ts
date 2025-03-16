@@ -229,8 +229,7 @@ export class EditProductComponent {
           detail: {
           brandId: data.modelId.brandId,
           categoryId: data.categoryId,
-          modelId: data.modelId
-          },
+          modelId: data.modelId        },
           tarif:{
             priceTTC: data.priceTTC,
             tva :data.tva,
@@ -240,7 +239,6 @@ export class EditProductComponent {
           }
 
         });
-
       },
       err => { console.error('Observer got an error: ' + err) },
     )
@@ -273,6 +271,7 @@ onSearchChange(args: string, type:string) {
   }else if (type === 'categorys'){
     this.getCategorys(filter);
   }else if (type === 'models'){
+
     this.getModeles(filter)
   }
 }
@@ -305,6 +304,7 @@ onSearchChange(args: string, type:string) {
        filter.where = Object.assign(filter.where, {brandId :this.brandId})
         this.modelesService.getModeles(filter).subscribe(
       data => {
+
        this.models = data[0]
      },
      err => {

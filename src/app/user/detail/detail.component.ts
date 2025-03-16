@@ -3,6 +3,7 @@ import { User } from '../user';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { SharedService } from '../../shared/shared.service';
+import { FilterDto } from '../../filter.dto';
 
 @Component({
   selector: 'app-detail',
@@ -10,7 +11,6 @@ import { SharedService } from '../../shared/shared.service';
   styleUrl: './detail.component.css'
 })
 export class DetailComponent {
-
   user = new User()
   // userAdd = new User()
   // userEdit = new User()
@@ -32,16 +32,14 @@ export class DetailComponent {
 
     })
   }
-
   getUser() {
     this.userService.getUser(this.userId).subscribe(
       (data:any) => {
-        this.user = data
+        this.user = data 
       },
       err => { console.error('Observer got an error: ' + err) },
     )
   }
-
   deleteAction() {
     this.showAlert = true;
   }
