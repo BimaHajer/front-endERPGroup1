@@ -40,7 +40,6 @@ export class EditBrandComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.brandId = Number(params.get('id'));
-      console.log(this.brandId);
       this.getBrand();
     });
   }

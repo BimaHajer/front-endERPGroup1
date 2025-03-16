@@ -45,8 +45,6 @@ export class AddTvaComponent {
           this.validateBtnState = ClrLoadingState.LOADING;
           this.userService.addTva(this.registerForm.value).subscribe(
             (data) => {
-  
-              console.log("user",data)
               this.validateBtnState = ClrLoadingState.SUCCESS;
               this.registerForm.reset({ active: true });
               this.alert = { success: true, msgSuccess: "L'ajout de tva " + data.id + " a été effectuée avec succès! ", echec: false, open: true }

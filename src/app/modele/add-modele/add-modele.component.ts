@@ -58,7 +58,6 @@ export class AddModeleComponent {
   
  
     getBrands(filter: any) {
-      console.log("Filtre utilisé pour la recherche des marques :", filter);
       filter.select = ['id', 'name'];
   
       this.brandsService.getBrands(filter).subscribe(

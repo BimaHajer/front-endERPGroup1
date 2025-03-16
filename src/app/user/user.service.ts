@@ -10,6 +10,9 @@ import { FilterDto } from '../filter.dto';
   providedIn: 'root'
 })
 export class UserService {
+  getRoles() {
+    throw new Error('Method not implemented.');
+  }
 
 
   constructor(private http: HttpClient) { }
@@ -32,6 +35,9 @@ export class UserService {
 
   deleteUser(ID: number): Observable<User> {
     return this.http.delete(environment.api + '/users/' + JSON.stringify(ID));
+  }
+  getRole(){
+  return this.http.get(environment.api+'/roles')
   }
 
   deleteMultiple(toDelete: number[], toDisable: number[]): Observable<any> {

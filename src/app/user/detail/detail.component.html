@@ -33,6 +33,11 @@
       <label *ngIf="!user.email"><span class="label label-warning">Non disponible!</span></label>
     </clr-input-container>
     <clr-input-container>
+      <label>Rôle</label>
+      <label *ngIf="user.roleId"><span class="label label-info">{{ user.roleId.name }}</span></label>
+      <label *ngIf="!user.roleId"><span class="label label-warning">Non disponible!</span></label>
+    </clr-input-container>
+    <clr-input-container>
       <label>Téléphone</label>
       <input clrInput type="text" readonly name="phone" [ngModel]="user.phone" *ngIf="user.phone" />
       <label *ngIf="!user.phone"><span class="label label-warning">Non disponible!</span></label>

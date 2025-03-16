@@ -53,8 +53,7 @@ export class ProductsComponent {
 
   getProducts() {
     this.productService.getProducts(this.filter).subscribe(
-      data => {
-        console.log('Données reçues:', data);  
+      data => {  
         this.products = data[0]; 
         this.count = data[1];     
       },

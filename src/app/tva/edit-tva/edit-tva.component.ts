@@ -56,7 +56,6 @@ export class EditTvaComponent {
     if (this.registerForm.valid) {
       this.validateBtnState = ClrLoadingState.LOADING
       if (this.tvaId) {
-        console.log("id",this.tvaId)
           this.tvaService.editTva(this.tvaId, this.registerForm.value).subscribe(
             data => {
               this.tva = data

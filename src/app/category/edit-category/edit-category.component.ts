@@ -38,7 +38,6 @@ export class EditCategoryComponent {
     ngOnInit() {
       this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
         this.categoryId = Number(params.get('id'));
-        console.log('Category ID:', this.categoryId);
         this.getCategorys();
       });
     }
@@ -65,7 +64,6 @@ export class EditCategoryComponent {
     if (this.registerForm.valid) {
       this.validateBtnState = ClrLoadingState.LOADING
       if (this.categoryId) {
-        console.log("id",this.categoryId)
           this.categoryService.editCategory(this.categoryId, this.registerForm.value).subscribe(
             data => {
               this.category = data

@@ -23,7 +23,6 @@ export class ProvidersService {
   }
 
   editProviders(ID: number, providersObject: Providers): Observable<Providers> {
-    console.log("id",ID)
     return this.http.patch<Providers>(environment.api + '/providers/'+JSON.stringify(ID), providersObject);
   }
 

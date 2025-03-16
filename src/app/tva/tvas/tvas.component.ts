@@ -41,7 +41,6 @@ export class TvasComponent {
 getTva() {
 this.TvaService.getTvas(this.filter).subscribe(
   data => {
-    console.log("Data received:", data); 
     this.tvas = data[0]
     this.count = data[1]
   },

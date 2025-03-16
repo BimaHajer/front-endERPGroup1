@@ -40,10 +40,8 @@ export class ProviderssComponent {
   }
 
   getProviders() {
-    console.log("filter",this.filter)
     this.providersService.getProviders(this.filter).subscribe(
       data => {
-        console.log("data",data)
         this.providerss = data[0]
         this.count = data[1]
       },

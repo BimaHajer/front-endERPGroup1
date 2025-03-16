@@ -65,7 +65,6 @@ providersId: number=0
   if (this.registerForm.valid) {
     this.validateBtnState = ClrLoadingState.LOADING
     if (this.providersId) {
-      console.log("id",this.providersId)
         this.providersService.editProviders(this.providersId, this.registerForm.value).subscribe(
           data => {
             this.providers = data
