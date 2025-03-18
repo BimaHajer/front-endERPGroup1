@@ -1,13 +1,13 @@
 
 <span #top class="scroll-margin-top">
-    <span><a routerLink="/brands">Marque</a></span> /
+    <span><a routerLink="/brands">Marques</a></span> /
     <span>Ajout</span>
   </span>
   <section>
     <div>
       <app-alert [success]="alert.success" [msgSuccess]="alert.msgSuccess" [echec]="alert.echec" [msgEchec]="alert.msgEchec" (closed)="alert.open = false" *ngIf="alert.open"></app-alert>
 
-    <h3>Ajouter Brand</h3>
+    <h3>Ajouter Marque</h3>
     
     <form clrForm [formGroup]="brandForm">
       <clr-input-container>

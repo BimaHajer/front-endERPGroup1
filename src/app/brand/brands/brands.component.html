@@ -1,6 +1,5 @@
 <section class="title">
     <h3 class="welcome">Marques</h3>
-    <cds-icon shape="tags"></cds-icon>
 
     <clr-datagrid [clrDgLoading]="loading" (clrDgRefresh)="refresh($event)" [(clrDgSelected)]="allSelected"
         (clrDgSelectedChange)="selectionChanged()" [clrDgRowSelection]="false">
@@ -30,10 +29,6 @@
         <clr-dg-column [clrDgSortBy]="'name'">
             <ng-container *clrDgHideableColumn="{hidden: false}">Nom</ng-container>
         </clr-dg-column>
-
-        <clr-dg-column [clrDgSortBy]="'description'">
-            <ng-container *clrDgHideableColumn="{hidden: false}">Description</ng-container>
-        </clr-dg-column>
          
         <clr-dg-column>
             <ng-container *clrDgHideableColumn="{hidden: false}">Picture</ng-container>
@@ -55,12 +50,6 @@
             <clr-dg-cell routerLink="/brands/detail-brand/{{item.id}}">
                 <span *ngIf="item.name">{{item.name}}</span>
                 <cds-icon shape="ban" *ngIf="!item.name"></cds-icon>
-            </clr-dg-cell>
-
-         
-            <clr-dg-cell routerLink="/brands/detail-brand/{{item.id}}">
-                <span *ngIf="item.description">{{item.description}}</span>
-                <cds-icon shape="ban" *ngIf="!item.description"></cds-icon>
             </clr-dg-cell>
      
             <clr-dg-cell routerLink="/brands/detail-brand/{{item.id}}">

@@ -31,13 +31,13 @@ export class DeleteComponent {
               if (this.toDelete.length + this.toDisable.length == this.allSelected?.length) {
                 if (this.toDisable.length != 0) {
                   if (this.toDisable.length == 1) {
-                    this.msgAlertDisable = "L'fournisseur: \" " + this.toDisable + " \" a des relations avec d'autres tables. Vous ne pouvez que le désactiver !"
+                    this.msgAlertDisable = "Le fournisseur: \" " + this.toDisable + " \" a des relations avec d'autres tables. Vous ne pouvez que le désactiver !"
                   } else
                     this.msgAlertDisable = "Les fournisseurs: \" " + this.toDisable + " \" ont des relations avec d'autres tables. Vous ne pouvez que les désactiver !"
                 }
                 if (this.toDelete.length != 0) {
                   if (this.toDelete.length == 1) {
-                    this.msgAlertDelete = "Voulez-vous vraiment supprimer l'fournisseur: \" " + this.toDelete + " \" !"
+                    this.msgAlertDelete = "Voulez-vous vraiment supprimer le fournisseur: \" " + this.toDelete + " \" !"
                   } else
                     this.msgAlertDelete = "Voulez-vous vraiment supprimer les fournisseurs: \" " + this.toDelete + " \" !"
                 }

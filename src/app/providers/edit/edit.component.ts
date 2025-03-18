@@ -70,7 +70,7 @@ providersId: number=0
             this.providers = data
             this.success = true
             this.validateBtnState = ClrLoadingState.SUCCESS
-            this.alert = { success: true, msgSuccess: " La modification d'fournisseur "   + data.id + " a été effectué avec succès! ", echec: false, open: true }
+            this.alert = { success: true, msgSuccess: " La modification du fournisseur "   + data.id + " a été effectué avec succès! ", echec: false, open: true }
           },
           err => {
             console.error('Observer got an error: ' + err)

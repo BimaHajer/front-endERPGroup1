@@ -1,11 +1,14 @@
 <span #top class="scroll-margin-top">
-  <span><a routerLink="/products">produit</a></span> /
+  <span><a routerLink="/products">produits</a></span> /
   <span>Ajout</span>
 </span>
 <app-alert [success]="alert.success" [msgSuccess]="alert.msgSuccess" [echec]="alert.echec" [msgEchec]="alert.msgEchec" (closed)="alert.open = false" *ngIf="alert.open" class="alert-spacing"></app-alert>
 <br>
 
 <section>
+    <h3>Ajouter Produit</h3>
+    <br>
+    
   <div>
       <form clrStepper [formGroup]="productForm" (ngSubmit)="submitAction(top)">
           <clr-stepper-panel formGroupName="general">

@@ -51,7 +51,7 @@ export class AddComponent {
           (data) => {
             this.validateBtnState = ClrLoadingState.SUCCESS;
             this.registerForm.reset({ active: true });
-            this.alert = { success: true, msgSuccess: "L'ajout d'fournisseur " + data.id + " a été effectué avec succès! ", echec: false, open: true }
+            this.alert = { success: true, msgSuccess: "L'ajout du fournisseur " + data.id + " a été effectué avec succès! ", echec: false, open: true }
           },
           (err) => {
             console.error('Observer got an error: ' + err);

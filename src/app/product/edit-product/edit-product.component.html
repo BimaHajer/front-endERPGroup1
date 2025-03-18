@@ -1,13 +1,12 @@
 <span #top class="scroll-margin-top">
-    <span><a routerLink="/products">Produit</a></span>/ 
+    <span><a routerLink="/products">Produits</a></span>/ 
     <span>Modification</span>
 </span>
 
 <section>
     <app-alert [success]="alert.success" [msgSuccess]="alert.msgSuccess" [echec]="alert.echec" [msgEchec]="alert.msgEchec" (closed)="alert.open = false" *ngIf="alert.open"></app-alert>
-   <br>
     <h3>Modifier produit</h3>
-
+<br>
     <div class="spinner-class" *ngIf="!productId">
         <clr-spinner [clrMedium]="true"></clr-spinner>
     </div>
@@ -132,7 +131,7 @@
             </clr-step-content>
         </clr-stepper-panel>
         <br><br>
-        <div class="btn-group btn-sm btn-outline-primary">
+        <div class="btn-group  btn-outline-primary">
             <button type="reset" class="btn" (mousedown)="redirectTo()">
                 <cds-icon shape="undo"></cds-icon> Retour
             </button>
