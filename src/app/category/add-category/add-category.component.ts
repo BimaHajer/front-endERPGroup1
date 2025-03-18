@@ -51,14 +51,14 @@ export class AddCategoryComponent {
 
               this.validateBtnState = ClrLoadingState.SUCCESS;
               this.registerForm.reset({ active: true });
-              this.alert = { success: true, msgSuccess: "L'ajout d'categorie " + data.id + " a été effectué avec succès! ", echec: false, open: true }
+              this.alert = { success: true, msgSuccess: "L'ajout d'catégorie" + data.id + " a été effectué avec succès! ", echec: false, open: true }
             },
             (err) => {
               console.error('Observer got an error: ' + err);
               if (/e-mail existe déjà/.test(err.error.message)) {
                 this.alert = { success: false, msgEchec: err.error.message, echec: true, open: true }
               } else {
-                this.alert = { success: false, msgEchec: "L'ajout d'un fournisseur a été échoué ..", echec: true, open: true }
+                this.alert = { success: false, msgEchec: "L'ajout d'une catégorie a été échoué ..", echec: true, open: true }
               }
                 this.validateBtnState = ClrLoadingState.ERROR;
             }

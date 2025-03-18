@@ -36,23 +36,6 @@
                         <textarea clrTextarea [(ngModel)]="product.description" name="description" required *ngIf="product.description"></textarea>
                         <label *ngIf="!product.description"><span class="label label-warning">Non disponible!</span></label>
                     </clr-textarea-container>
-
-                    <clr-input-container>
-                        <label>Actif / Non actif</label>
-                        <label *ngIf="product.active==true"><span class="label label-success">Actif</span></label>
-                        <label *ngIf="product.active==false"><span class="label label-warning">Non actif</span></label>
-                    </clr-input-container>
-
-              
-                </form>
-            </clr-tab-content>
-        </clr-tab>
-
-        <clr-tab>
-            <button clrTabLink>Tarif</button>
-            <clr-tab-content *clrIfActive>
-                <form clrForm>
-        
                     <clr-input-container>
                         <label>Catégorie</label>
                         <input clrInput type="text" value="{{product.categoryId?.name}}" readonly *ngIf="product.categoryId?.name" />
@@ -70,6 +53,23 @@
                         <input clrInput type="text" value="{{product.modelId?.name}}" readonly *ngIf="product.modelId?.name" />
                         <label *ngIf="!product.modelId?.name"><span class="label label-warning">Non disponible!</span></label>
                     </clr-input-container>
+
+                    <clr-input-container>
+                        <label>Actif / Non actif</label>
+                        <label *ngIf="product.active==true"><span class="label label-success">Actif</span></label>
+                        <label *ngIf="product.active==false"><span class="label label-warning">Non actif</span></label>
+                    </clr-input-container>
+
+              
+                </form>
+            </clr-tab-content>
+        </clr-tab>
+
+        <clr-tab>
+            <button clrTabLink>Tarif</button>
+            <clr-tab-content *clrIfActive>
+                <form clrForm>
+
         
                     <clr-input-container>
                         <label>TVA (%)</label>
@@ -134,7 +134,7 @@
 
     <br>
 
-    <div class="btn-group btn-sm btn-outline-primary">
+    <div class="btn-group  btn-outline-primary">
         <button class="btn" (mousedown)="redirectTo()">
             <cds-icon shape="undo"></cds-icon> Retour
         </button>

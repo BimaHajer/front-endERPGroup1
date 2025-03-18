@@ -1,5 +1,5 @@
 <span>
-    <span><a routerLink="/category">Categorie</a></span> /
+    <span><a routerLink="/category">Catégorie</a></span> /
     <span>Details</span>
   </span>
   <br>
@@ -29,11 +29,6 @@
         </label>
       </clr-textarea-container>
       
-      <clr-input-container>
-        <label>status</label>
-        <input clrInput type="text" readonly name="status" [ngModel]="category.status" *ngIf="category.status" />
-        <label *ngIf="!category.status"><span class="label label-warning">Non disponible!</span></label>
-      </clr-input-container>
       
       <clr-input-container>
         <label>Actif / Non actif</label>

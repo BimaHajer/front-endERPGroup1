@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedService } from '../../shared/shared.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -33,7 +34,7 @@ export class SideNavComponent {
 
     ,
     {
-        "name": "Categories",
+        "name": "Catégories",
         "route": "category",
         "icon": "folder",
         "order": 4,
@@ -68,15 +69,21 @@ export class SideNavComponent {
   "route": "modeles",
   "icon": "form",
   "order": 8,
-  "subsNavbar": []
+  "subsNavbar": [],
+  "roles": ["SuperAdmin", "Admin"]
 },
 {
   "name": "Produits",
   "route": "products",
-  "icon": "form",
+  "icon": "store",
   "order": 9,
-  "subsNavbar": []
-}
+  "subsNavbar": [],
+"roles": ["SuperAdmin", "Admin"]}
 ]
-
+  role: any;
+constructor(private sharedService: SharedService) {}
+  ngOnInit(): void {
+    this.role = this.sharedService.getCookie('role');
+    console.log("role",this.role)
+  }
 }
