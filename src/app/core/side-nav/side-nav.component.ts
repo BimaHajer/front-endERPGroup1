@@ -84,6 +84,5 @@ export class SideNavComponent {
 constructor(private sharedService: SharedService) {}
   ngOnInit(): void {
     this.role = this.sharedService.getCookie('role');
-    console.log("role",this.role)
   }
 }

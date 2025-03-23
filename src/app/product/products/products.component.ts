@@ -19,7 +19,7 @@ export class ProductsComponent {
   products: any[] = []
   showAlert: boolean = false;
   count: number = 0;
-  
+
   loading: boolean = true
   state: ClrDatagridStateInterface = {}
 
@@ -36,6 +36,9 @@ export class ProductsComponent {
   modeles: any;
   form: any;
   fb: any;
+  openModalMultipleImage: boolean = false
+  folder: string = ''
+  productId:any;
   constructor(private productService: ProductService, private router: Router, private sharedService:SharedService, private brandsService: BrandService,private categorysService: CategoryService,private modelesService: ModeleService ,private formBuilder: FormBuilder) {}
 
   ngOnInit() {
@@ -45,24 +48,24 @@ export class ProductsComponent {
   refresh(state: ClrDatagridStateInterface) {
     this.loading = true
     this.state = state
-    this.filter = Object.assign(this.filter,handleStateFilter(this.state)) 
+    this.filter = Object.assign(this.filter,handleStateFilter(this.state))
      this.filter.relations=['categoryId','modelId','modelId.brandId']
     this.getProducts()
   }
- 
+
 
   getProducts() {
     this.productService.getProducts(this.filter).subscribe(
-      data => {  
-        this.products = data[0]; 
-        this.count = data[1];     
+      data => {
+        this.products = data[0];
+        this.count = data[1];
       },
       err => console.error('Erreur lors de la récupération des produits:', err),
       () => {
         this.loading = false;      }
     );
   }
-  
+
 
   close() {
     this.showAlert = false;
@@ -93,4 +96,9 @@ export class ProductsComponent {
   editAction() {
     this.router.navigate(['/products/edit-product/', this.allSelected[0].id]);
   }
+  showImagesProduct(){
+    this.openModalMultipleImage = true
+    this.folder = `products/product${this.allSelected[0].id}`
+    this.productId = this.allSelected[0].id
+   }
 }

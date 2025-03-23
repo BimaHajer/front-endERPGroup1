@@ -13,7 +13,7 @@ import { ProductService } from '../product.service';
   styleUrl: './detail-product.component.css'
 })
 export class DetailProductComponent {
-  @Input() allSelected: any[] = [];  
+  @Input() allSelected: any[] = [];
   product = new Product();
   showAlert: boolean = false;
   productId: number = -1;
@@ -52,7 +52,7 @@ export class DetailProductComponent {
     );
   }
 
- 
+
   deleteAction() {
     this.showAlert = true;
   }
@@ -68,5 +68,22 @@ export class DetailProductComponent {
 
   redirectTo() {
     window.history.back();
+  }
+
+  deleteImage(image:any){
+    let folder = `products/product${this.product.id}`
+    let data = {
+     imageId: image.id,
+     publicId: `${image.path.substring(image.path.indexOf(folder)).split('.')[0]}`,
+    }
+    this.sharedService.removeImage(data).subscribe(
+        (data:any) => {
+          this.getProduct()
+        },
+        (err:any) => {
+          console.error('Observer got an error: ' + err)
+        }
+      );
+
   }
 }

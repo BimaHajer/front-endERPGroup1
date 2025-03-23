@@ -13,7 +13,7 @@
 
     <clr-tabs *ngIf="productId">
 
-        
+
         <clr-tab>
             <button clrTabLink>Informations Générales</button>
             <clr-tab-content *clrIfActive>
@@ -41,13 +41,13 @@
                         <input clrInput type="text" value="{{product.categoryId?.name}}" readonly *ngIf="product.categoryId?.name" />
                         <label *ngIf="!product.categoryId?.name"><span class="label label-warning">Non disponible!</span></label>
                     </clr-input-container>
-        
+
                     <clr-input-container>
                         <label>Marque</label>
-                        <input clrInput type="text" value="{{product.modelId.brandId?.name}}" readonly *ngIf="product.modelId.brandId?.name" />
-                        <label *ngIf="!product.modelId.brandId?.name"><span class="label label-warning">Non disponible!</span></label>
+                        <input clrInput type="text" value="{{product.modelId?.brandId?.name}}" readonly *ngIf="product.modelId?.brandId?.name" />
+                        <label *ngIf="!product.modelId?.brandId?.name"><span class="label label-warning">Non disponible!</span></label>
                     </clr-input-container>
-        
+
                     <clr-input-container>
                         <label>Modèle</label>
                         <input clrInput type="text" value="{{product.modelId?.name}}" readonly *ngIf="product.modelId?.name" />
@@ -60,7 +60,7 @@
                         <label *ngIf="product.active==false"><span class="label label-warning">Non actif</span></label>
                     </clr-input-container>
 
-              
+
                 </form>
             </clr-tab-content>
         </clr-tab>
@@ -70,31 +70,31 @@
             <clr-tab-content *clrIfActive>
                 <form clrForm>
 
-        
+
                     <clr-input-container>
                         <label>TVA (%)</label>
                         <input clrInput type="number" readonly [(ngModel)]="product.tva" name="tva" *ngIf="product.tva" />
                         <label *ngIf="!product.tva"><span class="label label-warning">Non disponible!</span></label>
                     </clr-input-container>
-        
+
                     <clr-input-container>
                         <label>Prix HT</label>
                         <input clrInput type="number" readonly [(ngModel)]="product.priceHT" name="priceHT" *ngIf="product.priceHT" />
                         <label *ngIf="!product.priceHT"><span class="label label-warning">Non disponible!</span></label>
                     </clr-input-container>
-        
+
                     <clr-input-container>
                         <label>Prix TTC</label>
                         <input clrInput type="number" readonly [(ngModel)]="product.priceTTC" name="priceTTC" *ngIf="product.priceTTC" />
                         <label *ngIf="!product.priceTTC"><span class="label label-warning">Non disponible!</span></label>
                     </clr-input-container>
-        
+
                     <clr-input-container>
                         <label>Quantité Initiale</label>
                         <input clrInput type="number" readonly [(ngModel)]="product.initialQuantity" name="initialQuantity" *ngIf="product.initialQuantity" />
                         <label *ngIf="!product.initialQuantity"><span class="label label-warning">Non disponible!</span></label>
                     </clr-input-container>
-        
+
                     <clr-input-container>
                         <label>Quantité Restante</label>
                         <input clrInput type="number" readonly [(ngModel)]="product.remainingQuantity" name="remainingQuantity" *ngIf="product.remainingQuantity" />
@@ -112,20 +112,28 @@
                         <input clrInput *ngIf="product.updatedAt" value="{{ product.updatedAt | date: 'dd/MM/yyyy à HH:mm' }}" readonly />
                         <label *ngIf="!product.updatedAt"><span class="label label-warning">Non disponible!</span></label>
                     </clr-input-container>
-        
+
                 </form>
             </clr-tab-content>
         </clr-tab>
-        
 
-      
+
+
         <clr-tab>
             <button clrTabLink>Galerie</button>
             <clr-tab-content *clrIfActive>
                 <form clrForm>
 
-                   
-
+                  <div  class="d-flex flex-wrap pb-20">
+                    <div *ngFor="let img of product?.images ; let i = index" class="card-img card mg-r-20">
+                      <div class="d-flex" style="align-items: center; justify-content:space-between" >
+                              <button type="button" class="btn btn-icon btn-sm delete-icon" (click)="deleteImage(img)">
+                                  <cds-icon shape="trash" status="danger"></cds-icon>
+                              </button>
+                      </div>
+                      <img [src]="img.path" *ngIf="img.path" width="50px" height="50px"/>
+                      </div>
+                    </div>
                 </form>
             </clr-tab-content>
         </clr-tab>
