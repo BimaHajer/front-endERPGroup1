@@ -12,14 +12,14 @@ import { ModeleService } from '../modele.service';
   styleUrl: './add-modele.component.css'
 })
 export class AddModeleComponent {
-  
+
   validateBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
   success: boolean = false;
   erreurMsg: string = '';
   alert: Alert = new Alert()
   brands: Brand[] = []
-    loading: boolean = false 
-    
+    loading: boolean = false
+
   modeleForm: FormGroup;
   constructor(
     private formBuilder: FormBuilder,
@@ -47,23 +47,22 @@ export class AddModeleComponent {
     if (args) {
       filter.take = 10
         filter.where = { name: { type: "ilike", value: args  }, active: true }
-      
+
     } else {
       filter.take = 15
         filter.where = { active: true }
     }
         this.getBrands(filter)
-        
+
     }
-  
- 
+
+
     getBrands(filter: any) {
       filter.select = ['id', 'name'];
-  
+
       this.brandsService.getBrands(filter).subscribe(
           data => {
-              console.log("Données reçues :", data);
-              this.brands = data[0]; 
+              this.brands = data[0];
           },
           err => {
               console.error('Erreur lors de la récupération des marques:', err);
@@ -72,7 +71,7 @@ export class AddModeleComponent {
       );
   }
 
-        
+
   submitAction(top: HTMLElement) {
     if (this.modeleForm.valid) {
       this.validateBtnState = ClrLoadingState.LOADING;
@@ -84,7 +83,7 @@ export class AddModeleComponent {
         },
         (err) => {
           console.error('Observer got an error: ' + err);
-          
+
             this.alert = { success: false, msgEchec: "L'ajout du modele été échoué ..", echec: true, open: true }
           this.validateBtnState = ClrLoadingState.ERROR;
         }

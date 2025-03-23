@@ -18,46 +18,46 @@
             </div>
         </clr-dg-action-bar>
 
-        
 
-        
+
+
         <clr-dg-column [clrDgSortBy]="'id'" [clrDgSortOrder]="descSort">
             <ng-container *clrDgHideableColumn="{hidden: false}">Id</ng-container>
         </clr-dg-column>
 
-        
+
         <clr-dg-column [clrDgSortBy]="'name'">
             <ng-container *clrDgHideableColumn="{hidden: false}">Nom</ng-container>
         </clr-dg-column>
-         
+
         <clr-dg-column>
             <ng-container *clrDgHideableColumn="{hidden: false}">Picture</ng-container>
         </clr-dg-column>
-      
+
         <clr-dg-column [clrDgSortBy]="'active'">
             <ng-container *clrDgHideableColumn="{hidden: false}">Actif / Non actif</ng-container>
         </clr-dg-column>
 
         <clr-dg-placeholder>Nous n'avons trouvé aucun brand!</clr-dg-placeholder>
 
-        
+
         <clr-dg-row *ngFor="let item of brands" [clrDgItem]="item" class="cursor-pointer" [clrDgSelected]="existInSelected(item)">
-            
-           
+
+
             <clr-dg-cell routerLink="/brands/detail-brand/{{item.id}}">{{item.id}}</clr-dg-cell>
 
-           
+
             <clr-dg-cell routerLink="/brands/detail-brand/{{item.id}}">
                 <span *ngIf="item.name">{{item.name}}</span>
                 <cds-icon shape="ban" *ngIf="!item.name"></cds-icon>
             </clr-dg-cell>
-     
+
             <clr-dg-cell routerLink="/brands/detail-brand/{{item.id}}">
                 <img *ngIf="item.picture" [src]="item.picture" alt="Logo de {{item.name}}" class="brand-picture-preview">
                 <cds-icon shape="ban" *ngIf="!item.picture"></cds-icon>
             </clr-dg-cell>
 
-           
+
             <clr-dg-cell routerLink="/brands/detail-brand/{{item.id}}">
                 <span *ngIf="item.active === true" class="label label-success">Actif</span>
                 <span *ngIf="item.active === false" class="label label-warning">Non actif</span>
