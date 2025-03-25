@@ -18,6 +18,8 @@ export class DeleteProductComponent {
   toDelete: number[] = []
   msgAlertDisable: string = ''
   msgAlertDelete: string = ''
+  idsDisable: string = ''
+  idsDelete: string = '' 
 
   constructor(private productService: ProductService) { }
 
@@ -26,7 +28,15 @@ export class DeleteProductComponent {
       this.productService.getProducts({ loadRelationIds: true, where: { id: {type: "in", value: this.allSelected} } }).subscribe(
         data => {
           data[0].forEach((element:any) => {
-           this.toDelete.push(element.id)
+            if (element.images?.length != 0 ) {
+              if (element.id != undefined) {
+                this.toDisable.push(element.id)
+                this.idsDisable = this.idsDisable + element.id + ', '
+              }
+            } else
+              if (element.id != undefined) {
+                this.toDelete.push(element.id)
+                this.idsDelete = this.idsDelete + element.id+ ', '} 
 
             if (this.toDelete.length + this.toDisable.length == this.allSelected?.length) {
               if (this.toDisable.length != 0) {

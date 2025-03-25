@@ -11,6 +11,7 @@ import { Product } from './product';
   providedIn: 'root'
 })
 export class ProductService {
+  getAllProducts: any;
   constructor(private http: HttpClient) { }
 
   getProducts(filter: FilterDto<Product>): Observable<[Product[], number]> {
