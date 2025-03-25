@@ -78,7 +78,16 @@ export class SideNavComponent {
   "icon": "store",
   "order": 9,
   "subsNavbar": [],
+"roles": ["SuperAdmin", "Admin"]},
+{
+  "name": "Mode de paiement",
+  "route": "paiments",
+  "icon": "credit-card",
+  "order": 10,
+  "subsNavbar": [],
 "roles": ["SuperAdmin", "Admin"]}
+
+
 ]
   role: any;
 constructor(private sharedService: SharedService) {}

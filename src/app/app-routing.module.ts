@@ -44,6 +44,10 @@ const routes: Routes = [
   {
     path: 'products',canActivate: [AuthGuard],
     loadChildren: () => import('./product/product.module').then(m => m.ProductModule)
+  },
+  {
+    path: 'paiments',canActivate: [AuthGuard],
+    loadChildren: () => import('./paiment/paiment.module').then(m => m.PaimentModule)
   }
 
 ];

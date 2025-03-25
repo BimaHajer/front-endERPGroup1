@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ClrLoadingState } from '@clr/angular';
-import { ModeleService } from '../modele.service';
+import { PaimentService } from '../paiment.service';
 
 @Component({
-  selector: 'app-delete-modele',
-  templateUrl: './delete-modele.component.html',
-  styleUrl: './delete-modele.component.css'
+  selector: 'app-delete-paiment',
+  templateUrl: './delete-paiment.component.html',
+  styleUrl: './delete-paiment.component.css'
 })
-export class DeleteModeleComponent {
-  
+export class DeletePaimentComponent {
   @Input() allSelected: number[] | undefined
   @Output() closed = new EventEmitter<boolean>();
   @Output() saved = new EventEmitter<boolean>();
@@ -19,39 +18,28 @@ export class DeleteModeleComponent {
   toDelete: number[] = []
   msgAlertDisable: string = ''
   msgAlertDelete: string = ''
-  idsDisable: string = ''
-  idsDelete: string = '' 
 
-  constructor(private modeleService: ModeleService) { }
+  constructor(private paimentService: PaimentService) { }
 
   ngOnInit(): void {
     if (this.allSelected?.length != 0) {
-      this.modeleService.getModeles({ loadRelationIds: true, where: { id: {type: "in", value: this.allSelected} } }).subscribe(
+      this.paimentService.getPaiments({ loadRelationIds: true, where: { id: {type: "in", value: this.allSelected} } }).subscribe(
         data => {
           data[0].forEach((element:any) => {
-            if (element.products?.length != 0 ) {
-              if (element.id != undefined) {
-                this.toDisable.push(element.id)
-                this.idsDisable = this.idsDisable + element.id + ', '
-              }
-            } else
-              if (element.id != undefined) {
-                this.toDelete.push(element.id)
-                this.idsDelete = this.idsDelete + element.id+ ', '} 
-
+           this.toDelete.push(element.id)
 
             if (this.toDelete.length + this.toDisable.length == this.allSelected?.length) {
               if (this.toDisable.length != 0) {
                 if (this.toDisable.length == 1) {
-                  this.msgAlertDisable = "Le modele: \" " + this.toDisable + " \" a des relations avec d'autres tables. Vous ne pouvez que le désactiver !"
+                  this.msgAlertDisable = "mode de paiment: \" " + this.toDisable + " \" a des relations avec d'autres tables. Vous ne pouvez que le désactiver !"
                 } else
-                  this.msgAlertDisable = "Les modeles: \" " + this.toDisable + " \" ont des relations avec d'autres tables. Vous ne pouvez que les désactiver !"
+                  this.msgAlertDisable = "Les modes de paiment: \" " + this.toDisable + " \" ont des relations avec d'autres tables. Vous ne pouvez que les désactiver !"
               }
               if (this.toDelete.length != 0) {
                 if (this.toDelete.length == 1) {
-                  this.msgAlertDelete = "Voulez-vous vraiment supprimer le modele: \" " + this.toDelete + " \" !"
+                  this.msgAlertDelete = "Voulez-vous vraiment supprimer mode de paiment: \" " + this.toDelete + " \" !"
                 } else
-                  this.msgAlertDelete = "Voulez-vous vraiment supprimer les modeles: \" " + this.toDelete + " \" !"
+                  this.msgAlertDelete = "Voulez-vous vraiment supprimer Les modes de paiments: \" " + this.toDelete + " \" !"
               }
             }
           })
@@ -63,10 +51,10 @@ export class DeleteModeleComponent {
     this.closed.emit(false);
   }
 
-  deleteModele() {
+  deletePaiment() {
     if (this.allSelected?.length != 0) {
       this.validateBtnState = ClrLoadingState.LOADING
-      this.modeleService.deleteMultiple(this.toDelete, this.toDisable).subscribe(
+      this.paimentService.deleteMultiple(this.toDelete, this.toDisable).subscribe(
         data => {
           if (data == true) {
             this.alertError = false
@@ -80,6 +68,7 @@ export class DeleteModeleComponent {
           this.validateBtnState = ClrLoadingState.ERROR
         }
       );
-    }
+      }
   }
+
 }
